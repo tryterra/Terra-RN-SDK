@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   
     s.description      = <<-DESC
-    A React Native package to interact with Terra Apple HealthKit SDK
+    React wrapper for TerraiOS sdk
                          DESC
   
     s.homepage         = 'https://github.com/tryterra/Terra-RN-SDK'
