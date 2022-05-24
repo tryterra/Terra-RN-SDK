@@ -1,0 +1,19 @@
+{
+  "name": "terra-react",
+  "version": "1.0.0",
+  "description": "Terra react wrapper for SDKs on iOS and Android",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Terra",
+    "Healthcare",
+    "Fitness"
+  ],
+  "author": "TryTerra",
+  "license": "MIT",
+  "dependencies": {
+    "react-native": "^0.68.2"
+  }
+}
