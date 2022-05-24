@@ -12,8 +12,5 @@
     "Fitness"
   ],
   "author": "TryTerra",
-  "license": "MIT",
-  "dependencies": {
-    "react-native": "^0.68.2"
-  }
+  "license": "MIT"
 }
