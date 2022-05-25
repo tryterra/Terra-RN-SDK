@@ -1,30 +1,29 @@
 //
-//  TerraiOSReact.m
-//  TerraiOSReact
+//  terra-ios.m
+//  example
 //
-//  Created by Jaafar Rammal on 18/05/2022.
+//  Created by Jaafar Rammal on 25/05/2022.
 //
 
+#import <Foundation/Foundation.h>
 #import "React/RCTBridgeModule.h"
 @interface RCT_EXTERN_REMAP_MODULE(TerraiOS, TerraiOSBridge, NSObject)
 
 // init
 RCT_EXTERN_METHOD(
-    initTerra:
-    (NSString *)devID
+    initTerra: (NSString *)devID
     apiKey: (NSString *)apiKey
     referenceId: (NSString *)referenceId
     intervalMinutes: (NSInteger)intervalMinutes
-    connections: (NSArray *)connections
-    permissions: (NSArray *)permissions
+    connectionsStr: (NSArray *)connectionsStr
+    permissionsStr: (NSArray *)permissionsStr
     resolve: (RCTPromiseResolveBlock)resolve
     rejecter: (RCTPromiseRejectBlock)reject
 )
 
 // check connection
 RCT_EXTERN_METHOD(
-    checkAuth:
-    (NSString *)connection
+    checkAuth: (NSString *)connection
     resolve: (RCTPromiseResolveBlock)resolve
     rejecter: (RCTPromiseRejectBlock)reject
 )

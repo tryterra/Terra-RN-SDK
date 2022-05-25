@@ -30,7 +30,7 @@ class TerraiOSBridge: NSObject {
             default:
                 print("Passed invalid connection")
         }
-        return nil
+      return Connections.APPLE_HEALTH
     }
     // permission type translate
     private func permissionParse(permission: String) -> Permissions {
@@ -50,12 +50,12 @@ class TerraiOSBridge: NSObject {
             default:
                 print("Passed invalid permission")
         }
-        return nil
+        return Permissions.ACTIVITY
     }
     
     // connection array to connection set
     private func connectionsSet(connections: [String]) -> Set<Connections> {
-        var out: Set<Connections> = []
+        var out: Set<Connections> = Set([])
         for connection in connections {
             out.insert(connectionParse(connection: connection))
         }
@@ -64,7 +64,7 @@ class TerraiOSBridge: NSObject {
 
     // permissions array to permissions set
     private func permissionsSet(permissions: [String]) -> Set<Permissions> {
-        var out: Set<Permissions> = []
+        var out: Set<Permissions> = Set([])
         for permission in permissions {
             out.insert(permissionParse(permission: permission))
         }
@@ -73,24 +73,15 @@ class TerraiOSBridge: NSObject {
 
     // initialize
     @objc
-    func initTerra(
-        _ devID: String,
-        apiKey: String,
-        referenceId: String,
-        intervalMinutes: Int,
-        connections: [String],
-        permissions: [String],
-        resolve: @escaping RCTPromiseResolveBlock,
-        rejecter reject: RCTPromiseRejectBlock
-    ){
+    func initTerra(_ devID: String, apiKey: String, referenceId: String, intervalMinutes: Int, connectionsStr: [String], permissionsStr: [String], resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock){
         do {
             terra = try Terra(
                             devId: devID,
                             xAPIKey: apiKey,
                             referenceId: referenceId,
-                            bodySleepDailyInterval: Double(intervalMinutes),
-                            connections: connectionsSet(connections: connections),
-                            permissions: permissionsSet(permissions: permissions)
+                            bodySleepDailyInterval: 60,
+                            connections: connectionsSet(connections: connectionsStr),
+                            permissions: permissionsSet(permissions: permissionsStr)
                             // TODO add HKTypes
                         ){(success: Bool) in resolve(["success": success])}
         } catch {
@@ -131,7 +122,7 @@ class TerraiOSBridge: NSObject {
     func readGlucoseData(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock){
         do {
             try terra?.readGlucoseData()
-            resolve()
+            resolve([])
         } catch {
             reject("Init", "Init failed, further debug messages avaialble in Xcode", nil)
         }

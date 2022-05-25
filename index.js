@@ -1,6 +1,5 @@
-import { NativeModules } from "react-native";
-import { Permissions, Connections } from "terra-react";
-
+const { NativeModules } = require("react-native");
+const { Connections, Permissions } = require("./helpers");
 const TerraiOS = NativeModules.TerraiOS;
 
 function ConnectionToString(connection) {
@@ -33,7 +32,7 @@ function PermissionsToString(permission) {
     }
 }
 
-export function initTerra(
+function initTerra(
     devID,
     apiKey,
     referenceId,
@@ -58,7 +57,7 @@ export function initTerra(
     }
 }
 
-export function deauthTerra(connection) {
+function deauthTerra(connection) {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.deauth(ConnectionToString(connection));
@@ -69,7 +68,7 @@ export function deauthTerra(connection) {
     }
 }
 
-export function checkAuth(connection) {
+function checkAuth(connection) {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.checkAuth(ConnectionToString(connection));
@@ -80,7 +79,7 @@ export function checkAuth(connection) {
     }
 }
 
-export function getBody(connection, startDate, endDate) {
+function getBody(connection, startDate, endDate) {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.getBody(
@@ -95,7 +94,7 @@ export function getBody(connection, startDate, endDate) {
     }
 }
 
-export function getActivity(connection, startDate, endDate) {
+function getActivity(connection, startDate, endDate) {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.getActivity(
@@ -110,7 +109,22 @@ export function getActivity(connection, startDate, endDate) {
     }
 }
 
-export function getSleep(connection, startDate, endDate) {
+function getDaily(connection, startDate, endDate) {
+    switch (Platform.OS) {
+        case "ios":
+            return TerraiOS.getDaily(
+                ConnectionToString(connection),
+                startDate.toISOString(),
+                endDate.toISOString()
+            );
+        case "android":
+            return undefined;
+        default:
+            undefined;
+    }
+}
+
+function getSleep(connection, startDate, endDate) {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.getSleep(
@@ -125,7 +139,7 @@ export function getSleep(connection, startDate, endDate) {
     }
 }
 
-export function getNutrition(connection, startDate, endDate) {
+function getNutrition(connection, startDate, endDate) {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.getNutrition(
@@ -140,7 +154,7 @@ export function getNutrition(connection, startDate, endDate) {
     }
 }
 
-export function getAthlete(connection) {
+function getAthlete(connection) {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.getAthlete(ConnectionToString(connection));
@@ -151,7 +165,7 @@ export function getAthlete(connection) {
     }
 }
 
-export function readGlucoseData() {
+function readGlucoseData() {
     switch (Platform.OS) {
         case "ios":
             return TerraiOS.readGlucoseData();
@@ -161,3 +175,18 @@ export function readGlucoseData() {
             undefined;
     }
 }
+
+module.exports = {
+    initTerra,
+    deauthTerra,
+    getActivity,
+    getAthlete,
+    getBody,
+    getNutrition,
+    getDaily,
+    getSleep,
+    readGlucoseData,
+    checkAuth,
+    Connections,
+    Permissions,
+};

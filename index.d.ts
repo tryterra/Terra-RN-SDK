@@ -1,4 +1,3 @@
-// TODO add types to promises
 declare module "terra-react" {
     export enum Permissions {
         "ATHLETE",

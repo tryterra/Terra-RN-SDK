@@ -10,7 +10,7 @@ source = 'https://github.com/tryterra/TerraiOS'
 
 Pod::Spec.new do |s|
     s.name             = 'TerraiOSReact'
-    s.version          = '1.0.0'
+    s.version          = '1.0.1'
     s.summary          = 'TerraiOS SDK wrapper for react native'
   
   # This description is used to generate tags and improve search results.
