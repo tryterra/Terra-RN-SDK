@@ -1,6 +1,7 @@
 const { NativeModules } = require("react-native");
 const { Connections, Permissions } = require("./helpers");
 const TerraiOS = NativeModules.TerraiOS;
+const TerraAndroid = NativeModules.TerraAndroidReactModule;
 
 function ConnectionToString(connection) {
     switch (connection) {
@@ -51,7 +52,14 @@ function initTerra(
                 permissions.map((p) => PermissionsToString(p))
             );
         case "android":
-            return undefined;
+            return TerraAndroid.initTerra(
+                devID,
+                apiKey,
+                referenceId,
+                intervalMinutes,
+                connections.map((c) => ConnectionToString(c)),
+                permissions.map((p) => PermissionsToString(p))
+            );
         default:
             undefined;
     }
@@ -73,7 +81,7 @@ function checkAuth(connection) {
         case "ios":
             return TerraiOS.checkAuth(ConnectionToString(connection));
         case "android":
-            return undefined;
+            return {};
         default:
             undefined;
     }
@@ -88,7 +96,11 @@ function getBody(connection, startDate, endDate) {
                 endDate.toISOString()
             );
         case "android":
-            return undefined;
+            return TerraAndroid.getBody(
+                ConnectionToString(connection),
+                startDate,
+                endDate
+            );
         default:
             undefined;
     }
@@ -103,7 +115,11 @@ function getActivity(connection, startDate, endDate) {
                 endDate.toISOString()
             );
         case "android":
-            return undefined;
+            return TerraAndroid.getActivity(
+                ConnectionToString(connection),
+                startDate,
+                endDate
+            );
         default:
             undefined;
     }
@@ -118,7 +134,11 @@ function getDaily(connection, startDate, endDate) {
                 endDate.toISOString()
             );
         case "android":
-            return undefined;
+            return TerraAndroid.getDaily(
+                ConnectionToString(connection),
+                startDate,
+                endDate
+            );
         default:
             undefined;
     }
@@ -133,7 +153,11 @@ function getSleep(connection, startDate, endDate) {
                 endDate.toISOString()
             );
         case "android":
-            return undefined;
+            return TerraAndroid.getSleep(
+                ConnectionToString(connection),
+                startDate,
+                endDate
+            );
         default:
             undefined;
     }
@@ -148,7 +172,11 @@ function getNutrition(connection, startDate, endDate) {
                 endDate.toISOString()
             );
         case "android":
-            return undefined;
+            return TerraAndroid.getNutrition(
+                ConnectionToString(connection),
+                startDate,
+                endDate
+            );
         default:
             undefined;
     }
@@ -159,7 +187,7 @@ function getAthlete(connection) {
         case "ios":
             return TerraiOS.getAthlete(ConnectionToString(connection));
         case "android":
-            return undefined;
+            return TerraAndroid.getAthlete(ConnectionToString(connection));
         default:
             undefined;
     }
@@ -170,7 +198,7 @@ function readGlucoseData() {
         case "ios":
             return TerraiOS.readGlucoseData();
         case "android":
-            return undefined;
+            return {};
         default:
             undefined;
     }

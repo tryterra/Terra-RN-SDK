@@ -11,6 +11,8 @@ declare module "terra-react" {
     export enum Connections {
         "APPLE_HEALTH",
         "FREESTYLE_LIBRE",
+        "GOOGLE_FIT",
+        "SAMSUNG",
     }
 
     export function initTerra(
