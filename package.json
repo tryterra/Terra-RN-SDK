@@ -1,6 +1,6 @@
 {
     "name": "terra-react",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Terra react wrapper for SDKs on iOS and Android",
     "main": "index.js",
     "repository": {
