@@ -6,7 +6,7 @@ A react native bridge for both TerraiOS and TerraAndroid, giving you hustle-free
 
 Regardless of Android or iOS, here are the functions available that you can import from `terra-react` (platform check is delt with under the hood):
 
-```ts
+```js
 // initialise terra with a set of connections and permissions
 export function initTerra(
     devID: string,
@@ -63,6 +63,28 @@ export function getNutrition(
 
 // init freestyle (just for Apple)
 export function readGlucoseData(): Promise<any>;
+```
+
+## Enums
+
+There is two available enums: providers (connections) and permissions. These can be used in the functions above where applicable.
+
+```js
+export enum Permissions {
+    "ATHLETE",
+    "ACTIVITY",
+    "BODY",
+    "DAILY",
+    "NUTRITION",
+    "SLEEP",
+}
+
+export enum Connections {
+    "APPLE_HEALTH",
+    "FREESTYLE_LIBRE",
+    "GOOGLE",
+    "SAMSUNG",
+}
 ```
 
 ## Android

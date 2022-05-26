@@ -9,6 +9,10 @@ function ConnectionToString(connection) {
             return "APPLE_HEALTH";
         case Connections.FREESTYLE_LIBRE:
             return "FREESTYLE_LIBRE";
+        case Connections.GOOGLE:
+            return "GOOGLE";
+        case Connections.SAMSUNG:
+            return "SAMSUNG";
         default:
             return undefined;
     }
@@ -81,6 +85,7 @@ function checkAuth(connection) {
         case "ios":
             return TerraiOS.checkAuth(ConnectionToString(connection));
         case "android":
+            // unimplemented in android sdk
             return {};
         default:
             undefined;
@@ -198,6 +203,7 @@ function readGlucoseData() {
         case "ios":
             return TerraiOS.readGlucoseData();
         case "android":
+            // unimplemented in android sdk
             return {};
         default:
             undefined;
